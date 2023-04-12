@@ -345,7 +345,7 @@ function load_itinerary_page() {
             var destination_img = "default" + itinerary.imgNum;
         }
         else {
-            destination_img = itinerary.destination
+            destination_img = itinerary.destination.toLowerCase();
         }
         var itineraryBoxHtml =
             '<div class="itinerary_box_wrapper">' +
@@ -434,7 +434,7 @@ function load_map_view_page(itinerary_index) {
     });
 
 
-    var map_pic_str = "img/" + itineraries[itinerary_index].destination + "_map.jpg";
+    var map_pic_str = "img/" + itineraries[itinerary_index].destination.toLowerCase() + "_map.jpg";
 
     var map_img = $('<img>').attr('src', map_pic_str);
 

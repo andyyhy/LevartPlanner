@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Levart Planner</title>
+    <link rel="stylesheet" href="style/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="scripts/index.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="#">Levart Planner</a>
+            </div>
+            <ul class="nav-links">
+                <li id="home"><a href="#">Home</a></li>
+                <li id="add_new_itinerary"><a href="#">Add New Itinerary</a></li>
+                <li class="profile_pic">
+                    <img src="img/logo.jpg" alt="Profile Picture">
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="itinerary_page">
+            <div class="itineraries_section_title">
+                <h1>Your Itineraries</h1>
+                <p id="start_page">Start Creating Your Trip Today!</p>
+            </div>
+            <div class="itineraries_section_content">
+            </div>
+        </section>
+        <section class="add_new_page">
+            <h1>Destinations</h1>
+            <hr>
+            <div class="text_input">
+                <div class="search">
+                    <form id="add_trip_form">
+                        <input type="text" placeholder="Enter a Destination (e.g. Paris, Shenzhen)" required>
+                        <div class="date_select">
+                            <label for="start-date">Start Date:</label>
+                            <input type="date" id="start-date" name="start-date" min="2000-01-01" max="2100-12-31"
+                                required>
+                            <label for="end-date">End Date:</label>
+                            <input type="date" id="end-date" name="end-date" min="2000-01-01" max="2100-12-31" required>
+                        </div>
+                        <input type="submit" value="Enter">
+                        <p id="error-message" style="display:none; color:red;">Error: Please select an available date range.</p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="default_view_page">
+            <div class="trip_title">
+                <div class="trip_title_words">
+                    <h1 class="view_page_destination">Paris</h1>
+                    <p class="view_page_date">Mar 18th -- Mar 22nd</p>
+                </div>
+                <hr>
+                <button class="default_view_btn">Default View</button>
+                <button class="map_view_btn">Map View</button>
+                <button class="calendar_view_btn">Calendar View</button>
+                <button class="add_to_trip_btn">Add to Trip</button>
+                <button class="delete_trip">Delete</button>
+                <div class="dropdown_content" style="display: none">
+                    <button class="dropdown_item" id="dropdown_place1">Place</button>
+                    <button class="dropdown_item" id="dropdown_flight1">Flight</button>
+                    <button class="dropdown_item" id="dropdown_hotel1">Hotel</button>
+                    <button class="dropdown_item" id="dropdown_restaurant1">Restaurant</button>
+                </div>
+            </div>
+            <div id="default_view_content"></div>
+        </section>
+        <section class="map_view_page">
+            <div class="trip_title">
+                <div class="trip_title_words">
+                    <h1 class="view_page_destination">Paris</h1>
+                    <p class="view_page_date">Mar 18th -- Mar 22nd</p>
+                </div>
+                <hr>
+                <button class="default_view_btn">Default View</button>
+                <button class="map_view_btn">Map View</button>
+                <button class="calendar_view_btn">Calendar View</button>
+                <button class="add_to_trip_btn">Add to Trip</button>
+                <button class="delete_trip">Delete</button>
+                <div class="dropdown_content" style="display: none">
+                    <button class="dropdown_item" id="dropdown_place2">Place</button>
+                    <button class="dropdown_item" id="dropdown_flight2">Flight</button>
+                    <button class="dropdown_item" id="dropdown_hotel2">Hotel</button>
+                    <button class="dropdown_item" id="dropdown_restaurant2">Restaurant</button>
+                </div>
+            </div>
+            <div id="map_view_content"></div>
+        </section>
+        <section class="calendar_view_page">
+            <div class="trip_title">
+                <div class="trip_title_words">
+                    <h1 class="view_page_destination">Paris</h1>
+                    <p class="view_page_date">Mar 18th -- Mar 22nd</p>
+                </div>
+                <hr>
+                <button class="default_view_btn">Default View</button>
+                <button class="map_view_btn">Map View</button>
+                <button class="calendar_view_btn">Calendar View</button>
+                <button class="add_to_trip_btn">Add to Trip</button>
+                <button class="delete_trip">Delete</button>
+                <div class="dropdown_content" style="display: none">
+                    <button class="dropdown_item" id="dropdown_place3">Place</button>
+                    <button class="dropdown_item" id="dropdown_flight3">Flight</button>
+                    <button class="dropdown_item" id="dropdown_hotel3">Hotel</button>
+                    <button class="dropdown_item" id="dropdown_restaurant3">Restaurant</button>
+                </div>
+            </div>
+            <div id="calendar_view_content">
+                <div class="main-container">
+                    <div class="calendar">
+                        <div class="calendar-header">
+                            <h2>March 2023</h2>
+                            <button class="month-change-btn" id="prev_month">&lt;</button>
+                            <button class=" month-change-btn" id="next_month">&gt;</button>
+                        </div>
+                        <table class="calendar-table"></table>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="add_hotel">
+            <div class="form_container">
+                <form id=hotel_form>
+                    <h1>Add Hotel</h1>
+                    <label for="hotel-name">Hotel Name:</label>
+                    <input type="text" id="hotel-name" name="hotel-name" required>
+
+                    <label for="address">Address:</label>
+                    <input type="text" id="hotel-address" name="address">
+
+                    <label for="check-in-date">Check-in Date:</label>
+                    <input type="date" id="check-in-date" name="check-in-date" min="2000-01-01" max="2100-12-31"
+                        required>
+
+                    <label for="check-out-date">Check-out Date:</label>
+                    <input type="date" id="check-out-date" name="check-out-date" min="2000-01-01" max="2100-12-31"
+                        required>
+                    
+                        <p id="error-hotel" style="display:none; color:red;">Error: Please select an available date range.</p>
+
+                    <label for="confirmation-code">Confirmation Code:</label>
+                    <input type="text" id="hotel-confirmation-code" name="confirmation-code">
+
+                    <label for="hotel-phone-number">Hotel Phone Number:</label>
+                    <input type="tel" id="hotel-phone-number" name="hotel-phone-number">
+
+                    <label for="note">Note:</label>
+                    <textarea id="hotel-note" name="note"></textarea>
+
+                    <input class="sub_button" type="submit" value="Save">
+                    <button type="button" class="goback">Cancel</button>
+                </form>
+            </div>
+        </section>
+        <section class="add_flight">
+            <div class="form_container">
+                <form id="flight_form">
+                    <h1>Add Flight</h1>
+                    <label for="airline-name">Airline Name:</label>
+                    <input type="text" id="airline-name" name="airline-name" required>
+
+                    <label for="flight-number">Flight Number:</label>
+                    <input type="text" id="flight-number" name="flight-number" required>
+
+                    <label for="departure-airport">Departure Airport:</label>
+                    <input type="text" id="departure-airport" name="departure-airport" required>
+
+                    <label for="arrival-airport">Arrival Airport:</label>
+                    <input type="text" id="arrival-airport" name="arrival-airport" required>
+
+                    <label for="departure-date">Departure Date:</label>
+                    <input type="date" id="departure-date" name="departure-date" min="2000-01-01" max="2100-12-31"
+                        required>
+
+                    <label for="departure-time">Departure Time:</label>
+                    <input type="time" id="departure-time" name="departure-time" required>
+
+                    <label for="arrival-date">Arrival Date:</label>
+                    <input type="date" id="arrival-date" name="arrival-date" min="2000-01-01" max="2100-12-31" required>
+
+                    <p id="error-flight" style="display:none; color:red;">Error: Please select an available date range.</p>
+
+                    <label for="arrival-time">Arrival Time:</label>
+                    <input type="time" id="arrival-time" name="arrival-time" required>
+
+                    <label for="confirmation-code">Confirmation Code:</label>
+                    <input type="text" id="flight-confirmation-code" name="confirmation-code">
+
+                    <label for="note">Note:</label>
+                    <textarea id="flight-note" name="note"></textarea>
+
+                    <input class="sub_button" type="submit" value="Save">
+                    <button type="button" class="goback">Cancel</button>
+
+                </form>
+            </div>
+        </section>
+        <section class="add_restaurant">
+            <div class="form_container">
+                <form id="restaurant_form">
+                    <h1>Add Restaurant</h1>
+                    <label for="restaurant-name">Restaurant Name:</label>
+                    <input type="text" id="restaurant-name" name="restaurant-name" required>
+
+                    <label for="address">Address:</label>
+                    <input type="text" id="restaurant-address" name="address">
+
+                    <label for="reservation-date">Reservation Date:</label>
+                    <input type="date" id="reservation-date" name="reservation-date" min="2000-01-01" max="2100-12-31"
+                        required>
+                    
+                    <p id="error-res" style="display:none; color:red;">Error: Please select an available date within trip date range.</p>
+
+
+                    <label for="reservation-time">Reservation Time:</label>
+                    <input type="time" id="reservation-time" name="reservation-time">
+
+                    <label for="restaurant-phone-number">Restaurant Phone Number:</label>
+                    <input type="tel" id="restaurant-phone-number" name="restaurant-phone-number">
+
+                    <label for="note">Note:</label>
+                    <textarea id="restaurant-note" name="note"></textarea>
+
+                    <input class="sub_button" type="submit" value="Save">
+                    <button type="button" class="goback">Cancel</button>
+
+                </form>
+            </div>
+        </section>
+
+        <section class="add_place">
+            <div class="form_container">
+                <form id="place_form">
+                    <h1>Add Place</h1>
+                    <label for="place-name">Place Name:</label>
+                    <input type="text" id="place-name" name="place-name" required>
+
+                    <label for="type">Type:</label>
+                    <select id="place-type" name="type">
+                        <option value="Cafe">Cafe</option>
+                        <option value="Bar">Bar</option>
+                        <option value="Museum">Museum</option>
+                        <option value="Park">Park</option>
+                        <option value="Shopping">Shopping</option>
+                        <option value="Other">Other</option>
+                    </select>
+
+                    <label for="date">Date:</label>
+                    <input type="date" id="place-date" name="date" min="2000-01-01" max="2100-12-31" required>
+
+                    <p id="error-place" style="display:none; color:red;">Error: Please select an available date within trip date range.</p>
+
+                    <label for="address">Address:</label>
+                    <input type="text" id="place-address" name="address">
+
+                    <label for="open-hour">Open Hours:</label>
+                    <input type="time" id="start-time" name="start-time" >
+                    <input type="time" id="end-time" name="end-time" >
+                    <!-- <input type="text" id="open-hour" name="open-hour" required> -->
+
+                    <label for="note">Note:</label>
+                    <textarea id="place-note" name="note"></textarea>
+
+                    <input class="sub_button" type="submit" value="Save">
+                    <button type="button" class="goback">Cancel</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p id="footer">&copy; Winter 2023 EECS 493 Group 8. All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>

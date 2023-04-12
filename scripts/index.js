@@ -142,6 +142,7 @@ $(document).ready(function () {
         var tempdate = new Date(new_itinerary.startDate.replace(/-/g, '\/'))
 
         current_display_date = tempdate;
+        current_display_date.setDate(1);
 
         itinerary_hash[destination] = itineraries.length - 1;
 
@@ -373,6 +374,7 @@ function load_itinerary_page() {
                 if (itineraries[i].destination == h2Text) {
                     var tempdate = new Date(itineraries[i].startDate.replace(/-/g, '\/'))
                     current_display_date = tempdate;
+                    current_display_date.setDate(1);
                     current_itinerary_index = i;
                     CurTripStartDate = itineraries[current_itinerary_index].startDate;
                     CurTripEndDate = itineraries[current_itinerary_index].endDate;

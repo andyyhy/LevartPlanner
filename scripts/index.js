@@ -339,6 +339,7 @@ function load_itinerary_page() {
     }
     else {
         $("#start_page").text("Start Creating Your Trip Today!");
+        $("#start_page_sub").text("Currently Supported Cities: Casablanca, Cusco, Manchester, Paris, Shenzhen");
         $("#start_page").css('margin-top', '200px');
     }
 

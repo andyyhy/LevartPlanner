@@ -334,6 +334,7 @@ function load_itinerary_page() {
 
     if (itineraries.length != 0) {
         $("#start_page").text("");
+        $("#start_page_sub").text("");
         $("#start_page").css('margin-top', '0px');
     }
     else {
@@ -435,8 +436,13 @@ function load_map_view_page(itinerary_index) {
         console.log(dropdown_is_toggled);
     });
 
+    if (supported_cities.includes(itineraries[itinerary_index].destination.toLowerCase())) {
+        var map_pic_str = "img/" + itineraries[itinerary_index].destination.toLowerCase() + "_map.jpg";
+    }
+    else {
+        var map_pic_str = "img/world_map.jpg"
+    }
 
-    var map_pic_str = "img/" + itineraries[itinerary_index].destination.toLowerCase() + "_map.jpg";
 
     var map_img = $('<img>').attr('src', map_pic_str);
 

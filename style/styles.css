@@ -118,6 +118,13 @@ nav ul li a {
     font-style: italic;
 }
 
+.itinerary_page #start_page_sub {
+    color: gray;
+    margin-top: 50px;
+    font-size: 25px;
+    font-style: italic;
+}
+
 
 .itineraries_section_content {
     display: flex;

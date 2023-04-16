@@ -99,7 +99,7 @@ nav ul li a {
 
 
 .itinerary_page {
-    padding: 200px 0;
+    padding: 130px 0;
     background-color: #fafafa;
     text-align: center;
     height: 100vh;
@@ -113,8 +113,8 @@ nav ul li a {
 
 .itinerary_page #start_page {
     color: gray;
-    margin-top: 150px;
-    font-size: 80px;
+    margin-top: 100px;
+    font-size: 70px;
     font-style: italic;
 }
 
@@ -186,7 +186,6 @@ nav ul li a {
 .default_view_page br {
     margin-top: 50px;
 }
-
 
 
 .search h1 {
@@ -312,6 +311,11 @@ input[type="submit"]:hover {
 
 }
 
+.delete_trip {
+    background-color: #FFC3A2;
+    color: #425C5A;
+}
+
 button {
     border-radius: 50px;
     background-color: #425C5A;
@@ -342,6 +346,8 @@ button:hover {
     text-align: center;
     width: 120px;
 }
+
+
 
 .boxes {
     margin-top: 120px;
@@ -498,4 +504,11 @@ hr {
 .scroll-div {
     overflow: auto;
     max-height: 50px;
+}
+
+.empty_intstruction {
+    color: gray;
+    margin-top: 50px;
+    font-size: 25px;
+    font-style: italic;
 }

@@ -41,6 +41,7 @@ $(document).ready(function () {
     console.log
     clear_page();
     $(".itinerary_page").show();
+    load_itinerary_page();
     //$(".add_new_page").show();
     //$(".boxes").show();
 
@@ -49,8 +50,6 @@ $(document).ready(function () {
 
     //make_default_itinerary();
     //load_calendar_view_page(current_itinerary_index);
-
-    $('.calendar_view_page')
 
     $("#add_new_itinerary").click(load_add_new_itinerary_page);
     $("#home").click(load_itinerary_page);
@@ -340,7 +339,7 @@ function load_itinerary_page() {
     else {
         $("#start_page").text("Start Creating Your Trip Today!");
         $("#start_page_sub").text("Currently Supported Cities: Casablanca, Cusco, Manchester, Paris, Shenzhen");
-        $("#start_page").css('margin-top', '200px');
+        // $("#start_page").css('margin-top', '150px');
     }
 
     for (itinerary of itineraries) {
@@ -387,6 +386,10 @@ function load_itinerary_page() {
             }
         })
     })
+
+    var itineraryButtonHtml = '<button class="add_itinerary">Add New Itinerary</button>';
+    $('.itineraries_section_content').append(itineraryButtonHtml);
+    $('.add_itinerary').click(load_add_new_itinerary_page);
 }
 
 
@@ -653,7 +656,7 @@ function load_calendar_view_page(itinerary_index) {
     console.log(container);
     container.append(table);
 
-    $(".delete_trip").click(function () {
+    $(".delete_trip").click(function (event) {
 
         console.log(itineraries);
         itineraries.splice(itinerary_index, 1);
@@ -686,6 +689,13 @@ function load_default_view_page(itinerary_index) {
 
     // load all boxes
     loop_boxes(itinerary_index);
+
+    // Add instruction page
+    if (itineraries[itinerary_index].events.length == 0) {
+        var instruction = '<p class="empty_intstruction">Click "Add to Trip" and Start Building Your Trip!</p>';
+        $("#default_view_content").append(instruction);
+    }
+
 
     // Get references to the button and the dropdown menu
     var addToTripBtn = $(".add_to_trip_btn");
@@ -720,42 +730,51 @@ function load_default_view_page(itinerary_index) {
 
     all_delete_button.forEach(button => {
         button.addEventListener('click', () => {
-            var parentDiv = button.closest('.box');
+            if (confirm("Want to Delete?")) {
+                var parentDiv = button.closest('.box');
 
-            var box_id = parentDiv.id;
+                var box_id = parentDiv.id;
 
-            for (var i = 0; i < itineraries[itinerary_index].events.length; i++) {
-                if (itineraries[itinerary_index].events[i].box_id == box_id) {
-                    itineraries[itinerary_index].events.splice(i, 1);
+                for (var i = 0; i < itineraries[itinerary_index].events.length; i++) {
+                    if (itineraries[itinerary_index].events[i].box_id == box_id) {
+                        itineraries[itinerary_index].events.splice(i, 1);
+                    }
+                }
+
+                parentDiv.remove();
+
+                var trip_content_div = document.querySelector('#default_view_content');
+                var h1Elements = trip_content_div.querySelectorAll("h1")
+                h1Elements.forEach(h1Element => {
+                    const nextElement = h1Element.nextElementSibling;
+                    if (!nextElement) {
+                        console.log(12222);
+                        h1Element.remove();
+
+                    }
+                    else if (!nextElement.classList.contains('box')) {
+                        console.log(122);
+                        h1Element.remove();
+                    }
+                });
+                // Add instruction page
+                if (itineraries[itinerary_index].events.length == 0) {
+                    var instruction = '<p class="empty_intstruction">Click "Add to Trip" and Start Building Your Trip!</p>';
+                    $("#default_view_content").append(instruction);
                 }
             }
-
-            parentDiv.remove();
-
-            var trip_content_div = document.querySelector('#default_view_content');
-            var h1Elements = trip_content_div.querySelectorAll("h1")
-            h1Elements.forEach(h1Element => {
-                const nextElement = h1Element.nextElementSibling;
-                if (!nextElement) {
-                    console.log(12222);
-                    h1Element.remove();
-
-                }
-                else if (!nextElement.classList.contains('box')) {
-                    console.log(122);
-                    h1Element.remove();
-                }
-            });
         })
     });
 
     $(".delete_trip").click(function () {
 
-        console.log(itineraries);
-        itineraries.splice(itinerary_index, 1);
+        if (confirm("Want to Delete?")) {
+            console.log(itineraries);
+            itineraries.splice(itinerary_index, 1);
 
-        console.log(itineraries);
-        load_itinerary_page();
+            console.log(itineraries);
+            load_itinerary_page();
+        }
 
     });
     return;
